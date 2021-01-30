@@ -1,4 +1,3 @@
 import { App } from "./App";
 
-const app = new App().getApp();
-
+new App().getApp();

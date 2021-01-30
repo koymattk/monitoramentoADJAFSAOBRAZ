@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import userRouter from './routes/userRoutes';
 
 export class App {
     private express: express.Application;
@@ -8,9 +9,10 @@ export class App {
 
     constructor() {
         this.express = express();
-        this.listen();
         this.middlewares();
         this.database();
+        this.routes();
+        this.listen();
     }
 
     private listen(): void {
@@ -33,6 +35,10 @@ export class App {
     private middlewares() : void {
         this.express.use(express.json());
         this.express.use(cors());
+    }
+
+    private routes() :void {
+        this.express.use('/user', userRouter)
     }
 
 }
