@@ -3,6 +3,6 @@ import moneyController from '../controllers/moneyController';
 
 const moneyRouter = Router();
 
-moneyRouter.post('/', moneyController.enviaMoney);
+moneyRouter.post('/enviar', moneyController.enviaMoney);
 
 export default moneyRouter;
