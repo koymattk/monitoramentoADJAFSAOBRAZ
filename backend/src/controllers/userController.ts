@@ -13,7 +13,7 @@ class UserController {
             name:user.name,
             age: user.age
         }
-        return res.json(user);
+        return res.json(resposta);
     }
 
     public async autenticar(req: Request, res: Response) : Promise<Response> {
@@ -28,7 +28,10 @@ class UserController {
         if(!validatePassword) {
             return res.status(400).send({message:"password incorreto"});
         }
-        return res.status(200).json(user);
+        return res.status(200).json({
+            user,
+            token: user.gerarToken()
+        });
     }
 
    
