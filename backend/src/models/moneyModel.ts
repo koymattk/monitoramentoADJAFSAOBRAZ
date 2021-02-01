@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-const dinnerSchema = new Schema({
+const moneySchema = new Schema({
     value: {
         type: Number,
         required: true
@@ -16,4 +16,4 @@ const dinnerSchema = new Schema({
     }
 })
 
-export default model('Dinner', dinnerSchema);
+export default model('Money', moneySchema);

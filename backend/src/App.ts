@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import userRouter from './routes/userRoutes';
+import moneyRouter from './routes/moneyRoutes';
 
 export class App {
     private express: express.Application;
@@ -39,6 +40,7 @@ export class App {
 
     private routes() :void {
         this.express.use('/user', userRouter)
+        this.express.use('/money',moneyRouter)
     }
 
 }
