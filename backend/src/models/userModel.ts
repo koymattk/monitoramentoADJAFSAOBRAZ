@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { userInterface } from "../interfaces/userInterface";
 import jwt from 'jsonwebtoken';
 
-interface userModelInterface extends userInterface, Document{
+export interface userModelInterface extends userInterface, Document{
     compararSenha(password:string) : Promise<boolean>;
     gerarToken(): string;
 }
