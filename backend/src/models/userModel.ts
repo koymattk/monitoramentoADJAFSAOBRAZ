@@ -1,13 +1,13 @@
 import { model, Schema, Document } from "mongoose";
 import bcrypt from 'bcrypt';
-interface userInterface extends Document {
-    _id: any | string;
-    name?: string;
-    password?: string;
-    age?: number;
+import { userInterface } from "../interfaces/userInterface";
+
+
+interface userModelInterface extends userInterface, Document{
+    compararSenha(password:string) : Promise<boolean>;
 }
 
-const userSchema = new Schema({
+const userSchema = new Schema<userModelInterface>({
     name: {
         type: String,
         required: true
@@ -22,8 +22,12 @@ const userSchema = new Schema({
     }
 })
 
-userSchema.pre<userInterface>('save', async function () {
+userSchema.pre<userModelInterface>('save', async function () {
     this.password = await  bcrypt.hash(this.password, 8);
 });
 
-export default model<userInterface>('User', userSchema);
+userSchema.methods.compararSenha = async function (password:string): Promise<boolean> {
+    return bcrypt.compare(password, this.password || '');
+}
+
+export default model<userModelInterface>('User', userSchema);
